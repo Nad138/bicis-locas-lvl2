@@ -4,6 +4,7 @@ function validateForm(){
   var correo = document.getElementById("input-email").value;
   var clave = document.getElementById("input-password").value;
   var bicis = document.getElementsByClassName('form-control')[4];
+  var inputs = document.getElementsByTagName("form-control");
 
   var bien = /^[A-Z]{1}[a-z]+$/; //Expresion reg: // abre y cierra, ^para inicio,[]caracter q debe tener,{}cuanto debe haber,+ aumenta, $busca en último.
   var mail = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;// \w letras y numeros, []incluye.y-,
@@ -39,12 +40,33 @@ function validateForm(){
       dark(mensaje,"formulario");
        }
 
-
+  var validarInput = function(){
+                  if(this.value.trim().length==0){
+                          this.value = "";
+                          this.nextElementSibling.nextElementSibling.innerText = "*Este campo es obligatorio";
+                     }
+                  else{
+                         this.nextElementSibling.nextElementSibling.innerText = "";
+                       }
+           }
+  for(var i = 0; i<inputs.length;i++){
+       		inputs[i].onblur = validarInput;
+        }
 
 function dark(mensaje,div){
   var cajita = document.getElementById(div);
   var alerta = document.createElement("span");
    alerta.innerText=mensaje;
     cajita.appendChild(alerta);
+  function tool(alerta){
+      if(alerta.style.display=="block"){
+        alerta.style.display=="none";
+      }
+      else{
+        alerta.style.display=="block";
+      }
+    }
+
+
 }
 }
