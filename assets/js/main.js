@@ -9,28 +9,42 @@ function validateForm(){
   var mail = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;// \w letras y numeros, []incluye.y-,
   var passw = /^\w{6,}$/; //{mínimo, maximo}
 
-  if(!bien.test(nombre) || !bien.test(apellido)){
-    alert("Iniciar con mayúscula cada palabra");
+  if(!bien.test(nombre)){
+    var mensaje="Debe iniciar con mayúscula cada palabra";
+    dark(mensaje,"nombre");
+  }
+  else if(!bien.test(apellido)){
+    var mensaje="Debe iniciar con mayúscula cada palabra";
+    dark(mensaje,"apellido");
   }
   else if(!mail.test(correo)){
-    alert("Ingreso no válido");
+    var mensaje="Ingreso no válido";
+    dark(mensaje,"email");
   }
   else if(!passw.test(clave) || clave === "password" || clave === "123456" || clave === "098754"){
-    alert("Su contraseña no es segura");
+     var mensaje="Su contraseña no es segura";
+     dark(mensaje,"password");
   }
   else if(bicis.value == 0){
-    alert("Debe seleccionar una opción");
+     var mensaje="Debe seleccionar una opción";
+     dark(mensaje,"bici");
   }
 
   if(nombre.length!=0 && apellido.length!=0 && correo.length!=0 && clave.length!=0 && bicis.length!=0){
-        alert("Se ha registrado con éxito");
+        var mensaje="Se ha registrado con éxito";
+        dark(mensaje,"formulario");
        }
   else{
-      alert("todos los campos son obligatorios");
+      var mensaje="Todos los campos son obligatorios";
+      dark(mensaje,"formulario");
        }
-}
-function dark(){
+
+
+
+function dark(mensaje,div){
+  var cajita = document.getElementById(div);
   var alerta = document.createElement("span");
-  var cajita = document.getElementsByTagName("div");
-   cajita.appendChild("alerta");
+   alerta.innerText=mensaje;
+    cajita.appendChild(alerta);
+}
 }
